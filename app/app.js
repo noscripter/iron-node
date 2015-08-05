@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var remote = require('remote');
-var dialog = remote.require('dialog');
+/*var dialog = remote.require('dialog');*/
 var markdown = require('markdown').markdown;
 var packageController = require("package.js");
 /*var events = require('events');*/
@@ -16,7 +16,7 @@ window.opener = window.open = require("open");
 
 var error = function(error) {
 	console.error(error);
-	var msgBoxConfig = {
+	var msg = {
 		type : "error", 
 		title : "Uncaught Exception", 
 		buttons:["ok", "close"]
@@ -24,21 +24,32 @@ var error = function(error) {
 
 	switch (typeof error) {
 		case "object":
-			msgBoxConfig.title = "Uncaught Exception: " + error.code;
-			msgBoxConfig.message = error.message;
-			msgBoxConfig.detail = error.stack;
+			if (error.code){
+				msg.title = "Uncaught Exception: " + error.code;
+			}
+			msg.message = error.message;
+			msg.detail = error.stack;
 			break;
 		case "string":
-			msgBoxConfig.message = error;
+			msg.message = error;
 			break;
 	}
 
+	var Toaster = require("electron-toaster");
+	var toaster = new Toaster();
+	msg.detail = "Check the console for more details."
+	msg.width = 440;
+	msg.height = 150;
+	msg.timeout = 6000;
 
+	toaster.show(msg);
+
+	/*
 	dialog.showMessageBox(remote.getCurrentWindow(), msgBoxConfig, function(response){
 		if (response === 1){
 			remote.getCurrentWindow().close();
 		}
-	});
+	});*/
 }
 
 process.on('uncaughtException', error);
