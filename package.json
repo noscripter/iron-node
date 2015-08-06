@@ -34,7 +34,7 @@
     "commander": "^2.8.1",
     "electron-prebuilt": "^0.30.2",
     "electron-recompile": "^1.0.5",
-    "electron-toaster": "^1.0.2",
+    "electron-toaster": "^1.0.7",
     "markdown": "^0.5.0",
     "nmp": "^1.0.3",
     "open": "0.0.5",

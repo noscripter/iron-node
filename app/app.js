@@ -1,10 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 var remote = require('remote');
-/*var dialog = remote.require('dialog');*/
 var markdown = require('markdown').markdown;
 var packageController = require("package.js");
-/*var events = require('events');*/
 var app = remote.require("app");
 
 /*var CustomApp = function  () {
@@ -39,17 +37,9 @@ var error = function(error) {
 	var toaster = new Toaster();
 	msg.detail = "Check the console for more details."
 	msg.width = 440;
-	msg.height = 150;
 	msg.timeout = 6000;
 
 	toaster.show(msg);
-
-	/*
-	dialog.showMessageBox(remote.getCurrentWindow(), msgBoxConfig, function(response){
-		if (response === 1){
-			remote.getCurrentWindow().close();
-		}
-	});*/
 }
 
 process.on('uncaughtException', error);
